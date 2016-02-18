@@ -40,6 +40,9 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386
 
+# Enable some UTF-8 support
+RUN locale-gen en_US.UTF-8
+
 # node.js and nvm
 RUN sudo -u ubuntu -i bash -li -c "curl https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh | sh -e" && \
     echo '[ -s "/home/ubuntu/.nvm/nvm.sh" ] && . "/home/ubuntu/.nvm/nvm.sh" # This loads nvm' >> /home/ubuntu/.profile
