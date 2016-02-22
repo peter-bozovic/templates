@@ -6,9 +6,11 @@ ENV DEBIAN_FRONTEND noninteractive
 # increment version to force flushing the cache
 RUN echo "Version 1.11"
 
-# Set mirrors to automatic based off location
-ADD files/auto-sources /etc/apt/auto-sources
-RUN bash /etc/apt/auto-sources
+RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse" > /etc/apt/sources.list && \
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse" >> /etc/apt/sources.list
+
 
 # Install add-apt-repository script
 RUN apt-get update --fix-missing && apt-get install -y software-properties-common
